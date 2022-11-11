@@ -501,14 +501,18 @@ document.getElementById('adv-search'.onclick = (e) => {
 $('.btn-sm ml-auto mr-3 bg-transparent font-itali').prev().attr("aria-expanded", "true");
 
 document.getElementById("send-button").onclick = (e) => {
-    if (!document.getElementById("email-input-text").value.length) {
-        alert("Please enter an email address.");
-        e.preventDefault();
+    const email = document.getElementById("email-input-text");
+    if (!email.value.length) {
+      alert("Please enter an email address.");
+      e.preventDefault();
+    } else if (!/^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$/.test(email.value)) {
+      alert("Please enter a valid email address.");
+      e.preventDefault();
     } else if (document.getElementById("template-select").value == "") {
-        alert("Please select a template.");
-        e.preventDefault();
-    }
-};
+      alert("Please select a template.");
+      e.preventDefault();
+    } 
+  };
 
 // document.getElementById('clear-selection').onclick = () => {
 //     document.getElementById('search-input').value = "";
