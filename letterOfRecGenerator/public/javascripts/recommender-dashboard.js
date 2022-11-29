@@ -465,7 +465,7 @@ function search(match) {
     },
   });
 }
-
+// sa4erches by email
 document.getElementById("search-div").onsubmit = (e) => {
   e.preventDefault();
   const match = {};
@@ -493,6 +493,31 @@ document.getElementById("send-button").onclick = (e) => {
     alert("Please select a template.");
     e.preventDefault();
   }
+  // } else {
+
+  //   var transporter = nodemailer.createTransport({
+  //     service: 'gmail',
+  //     auth: {
+  //       user: 'USCLetterOfRecommendation@gmail.com',
+  //       pass: 'FightOn!123'
+  //     }
+  //   });
+
+  //   var mailOptions = {
+  //     from: 'USCLetterOfRecommendation@gmail.com',
+  //     to: document.getElementById("email-input-text").value,
+  //     subject: document.getElementById("subject").value,
+  //     text: "test"
+  //   };
+
+  //   transporter.sendMail(mailOptions, function(error, info){
+  //     if (error) {
+  //       console.log(error);
+  //     } else {
+  //       console.log('Email sent: ' + info.response);
+  //     }
+  //   });
+  // }
 };
 
 // document.getElementById('clear-selection').onclick = () => {

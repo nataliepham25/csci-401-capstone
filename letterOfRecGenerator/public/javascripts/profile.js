@@ -317,44 +317,52 @@ function fillInAddress() {
   let address1 = "";
   let postalCode = "";
 
+  if (!place.geometry || !place.geometry.location) {
+    // User entered the name of a Place that was not suggested and
+    // pressed the Enter key, or the Place Details request failed.
+    window.alert("No details available for input: '" + place.name + "'");
+    return;
+  }
+
+  address1 = place.formatted_address;
   // Get each component of the address from the place details,
   // and then fill-in the corresponding field on the form.
   // place.address_components are google.maps.GeocoderAddressComponent objects
   // which are documented at http://goo.gle/3l5i5Mr
-  for (const component of place.address_components) {
-    const componentType = component.types[0];
+  // for (const component of place.address_components) {
+  //   const componentType = component.types[0];
 
-    switch (componentType) {
-      case "street_number": {
-        address1 = `${component.long_name} ${address1}`;
-        break;
-      }
+  //   switch (componentType) {
+  //     case "street_number": {
+  //       address1 = `${component.long_name} ${address1}`;
+  //       break;
+  //     }
 
-      case "route": {
-        address1 += component.short_name;
-        break;
-      }
+  //     case "route": {
+  //       address1 += component.short_name;
+  //       break;
+  //     }
 
-      case "postal_code": {
-        postalCode = `${component.long_name}${postalCode}`;
-        break;
-      }
+  //     case "postal_code": {
+  //       postalCode = `${component.long_name}${postalCode}`;
+  //       break;
+  //     }
 
-      case "postal_code_suffix": {
-        postalCode = `${postalCode}-${component.long_name}`;
-        break;
-      }
-      case "locality":
-        document.querySelector("#address3").value = component.long_name;
-        break;
-      case "administrative_area_level_1": {
-        document.querySelector("#address4").value = component.short_name;
-        break;
-      }
-      case "country":
-        break;
-    }
-  }
+  //     case "postal_code_suffix": {
+  //       postalCode = `${postalCode}-${component.long_name}`;
+  //       break;
+  //     }
+  //     case "locality":
+  //       document.querySelector("#address3").value = component.long_name;
+  //       break;
+  //     case "administrative_area_level_1": {
+  //       document.querySelector("#address4").value = component.short_name;
+  //       break;
+  //     }
+  //     case "country":
+  //       break;
+  //   }
+  // }
 
   const address1Field = document.querySelector("#address1");
   const address2Field = document.querySelector("#address2");

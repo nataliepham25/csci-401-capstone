@@ -72,13 +72,15 @@ router.post("/", async function (req, res, next) {
           "'Letter of Recommendation Generator' <" + email_username + ">";
 
         // create reusable transporter object using the default SMTP transport
+        console.log(email_username);
+        console.log(email_password);
         let transporter = nodemailer.createTransport({
-          host: "smtp.gmail.com",
+          host: "smtp.gmail.lcom",
           port: 465,
           secure: true, // true for 465, false for other ports
           auth: {
-            user: email_username, // generated ethereal user
-            pass: email_password, // generated ethereal password
+            user: "USCLetterOfRecommendation@gmail.com", // generated ethereal user
+            pass: "FightOn!123", // generated ethereal password
           },
           tls: {
             rejectUnauthorized: false,
@@ -87,7 +89,7 @@ router.post("/", async function (req, res, next) {
 
         // setup email data with unicode symbols
         let mailOptions = {
-          from: email_sender, // sender address
+          from: "USCLetterOfRecommendation@gmail.com", // sender address
           to: req.body.email, // list of receivers
           subject: req.body.subject_text, // Subject line
           text: req.body.body_text + " " + url, // plain text body

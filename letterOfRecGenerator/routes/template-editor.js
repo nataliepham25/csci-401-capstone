@@ -10,7 +10,6 @@ var router = express.Router();
 
 router.get("/", async function (req, res, next) {
   var decoded = jwt_decode(req.headers.authorization.replace("Bearer ", ""));
-
   //retrive user obj from mongodb
   var user = await User.findOne({ email: decoded.email });
   var letterheadImg;
