@@ -1,173 +1,171 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Letter of Recommendation Generator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/stylesheets/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/all.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/table.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/recommender-dashboard.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="/css/modal.css" />
+    <link rel="stylesheet" type="text/css" href="/css/recommender-dashboard.css" />
 </head>
-<body>
-<header>
-    <% include ../partials/header %>
-</header>
-<div class="body">
-    <div id="rec-header">
-        <p class="title">Recommendations</p>
-        <% if (templates.length) { %>
-            <form class="form-inline" id="search-div">
-                <div class="form-row">
-                    <div class = "col">
-                        <div class="input-group search-bar col">
-                            <input id="search-input" type="email" class="form-control filter-input" name="email" placeholder="Filter by Email">
-                            <div class="input-group-append">
-                                <button class="btn clr-btn search-x" type="button">x</button>
-                            </div>
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-outline-secondary" id="search-btn">Search</button>
-                            </div>
 
-                        </div>                       
-                        <button class="btn-sm ml-auto mr-3 bg-transparent font-italic" 
-                        style="border:none;" id="adv-search" type="button" data-toggle="collapse" 
-                        data-target="#advanced-search" aria-expanded="false" aria-controls="advanced-search">
+<body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <div class="body">
+        <div id="rec-header">
+            <p class="title">Recommendations</p>
+            <% if (templates.length) { %>
+                <form class="form-inline" id="search-div">
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="input-group search-bar col">
+                                <input id="search-input" type="email" class="form-control filter-input" name="email" placeholder="Filter by Email">
+                                <div class="input-group-append">
+                                    <button class="btn clr-btn search-x" type="button">x</button>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-secondary" id="search-btn">Search</button>
+                                </div>
+
+                            </div>
+                            <button class="btn-sm ml-auto mr-3 bg-transparent font-italic" style="border:none;" id="adv-search" type="button" data-toggle="collapse" data-target="#advanced-search" aria-expanded="false" aria-controls="advanced-search">
                             + Advanced Search
                         </button>
-                    </div>
-                    <!-- <div class="col">
-                        <button type="submit" class="btn" id="search-btn">Search</button>
+                        </div>
+                        <!-- <div class="col">
+                        <button type="submit" class="btn" id="search-btn">Search</button>s
                     </div> -->
-                </div>               
-            </form>
-            
-            <button class="add-btn mr-2 btn" onclick="openModal()">+ Create Recommendation</button>
-        <% } %>
-    </div>
-    <div class ="collapse" id="advanced-search">
-        <form class="form-inline" id="advanced-search-form">
-            <div class="form-row adv-search-options">
-                <div class="col">
-                    <div class="input-group col mt-2">
-                        <input id="template-input" type="text" class="form-control ml-auto filter-input" name="template" placeholder="Filter by Template">
-                        <div class="input-group-append">
-                            <button class="btn search-x clr-btn" type="button">x</button>
-                        </div>   
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group col mt-2">
-                        <input id="org-input" type="text" class="form-control filter-input" name="org" placeholder="Filter by Organization">
-                        <div class="input-group-append">
-                            <button class="btn search-x clr-btn" type="button">x</button>
-                        </div>   
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group col mt-2">
-                        <input id="startdate-input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control ml-auto filter-input" name="startdate" placeholder="Filter by Start Date">
-                        <div class="input-group-append">
-                            <button class="btn search-x clr-btn" type="button">x</button>
-                        </div>   
-                    </div>
-                    <div class="input-group col mt-2 mb-2">
-                        <input id="enddate-input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control ml-auto filter-input" name="enddate" placeholder="Filter by End Date">
-                        <div class="input-group-append">
-                            <button class="btn search-x clr-btn" type="button">x</button>
-                        </div> 
-                    </div>
-                    <button class="ml-auto mr-3 mb-2 btn" style='background-color: #FFFFFF;' id="advanced-search-btn">Search</button>
-                </div>
-            </div>             
-        </form>
-    </div>
-    <div id = "DefaultEmailModal" Class="modal">
-        <div class="modal-content">
-            <div class="close-container">
-                <span class="close" onclick="closeSaveModal()">&times;</span>
-            </div>
-            <p class="modal-title">Save it as a default template?</p>
-            <br>
-            <br>
-            <button id = "yes" onclick="saveDefaultTemplate()"> Yes </button>
-            <button id = "no" onclick="closeSaveModal()"> No </button>
+                </form>
+
+                <button class="add-btn mr-2 btn" onclick="openModal()">+ Create Recommendation</button>
+                <% } %>
         </div>
-    </div>
-    <div id="myModal" class="modal">
-        <div id="recommendations-modal" class="modal-content">
-            <div class="close-container">
-                <span class="close" onclick="closeModal()">&times;</span>
+        <div class="collapse" id="advanced-search">
+            <form class="form-inline" id="advanced-search-form">
+                <div class="form-row adv-search-options">
+                    <div class="col">
+                        <div class="input-group col mt-2">
+                            <input id="template-input" type="text" class="form-control ml-auto filter-input" name="template" placeholder="Filter by Template">
+                            <div class="input-group-append">
+                                <button class="btn search-x clr-btn" type="button">x</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group col mt-2">
+                            <input id="org-input" type="text" class="form-control filter-input" name="org" placeholder="Filter by Organization">
+                            <div class="input-group-append">
+                                <button class="btn search-x clr-btn" type="button">x</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group col mt-2">
+                            <input id="startdate-input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control ml-auto filter-input" name="startdate" placeholder="Filter by Start Date">
+                            <div class="input-group-append">
+                                <button class="btn search-x clr-btn" type="button">x</button>
+                            </div>
+                        </div>
+                        <div class="input-group col mt-2 mb-2">
+                            <input id="enddate-input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control ml-auto filter-input" name="enddate" placeholder="Filter by End Date">
+                            <div class="input-group-append">
+                                <button class="btn search-x clr-btn" type="button">x</button>
+                            </div>
+                        </div>
+                        <button class="ml-auto mr-3 mb-2 btn" style='background-color: #FFFFFF;' id="advanced-search-btn">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="DefaultEmailModal" Class="modal">
+            <div class="modal-content">
+                <div class="close-container">
+                    <span class="close" onclick="closeSaveModal()">&times;</span>
+                </div>
+                <p class="modal-title">Save it as a default template?</p>
+                <br>
+                <br>
+                <button id="yes" onclick="saveDefaultTemplate()"> Yes </button>
+                <button id="no" onclick="closeSaveModal()"> No </button>
             </div>
-            <p class="modal-title">Send Email</p>
-            <div class = "modal-background">
-                <form class="input-form" method="POST" action="/recommender-dashboard">
-                    <div class="input-container">
-                        <select class="input-dropdown" name="templateId" id="template-select">
+        </div>
+        <div id="myModal" class="modal">
+            <div id="recommendations-modal" class="modal-content">
+                <div class="close-container">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <p class="modal-title">Send Email</p>
+                <div class="modal-background">
+                    <form class="input-form" method="POST" action="/recommender-dashboard">
+                        <div class="input-container">
+                            <select class="input-dropdown" name="templateId" id="template-select">
                             <option value="" disabled selected>Select a template to send</option>
                             <% for (var template of templates) { %>
                             <option class="template-select-option" value=<%= template._id %>><%= template.name %></option>
                             <% } %>
                         </select>
-                        <div class="email-input">
-                            <p class="hint">To  </p>
-                            <input id="email-input-text" class="input-text" type="text" name="email">
+                            <div class="email-input">
+                                <p class="hint">To </p>
+                                <input id="email-input-text" class="input-text" type="text" name="email">
+                            </div>
+                            <div class="email-input">
+                                <p class="hint">Subject </p>
+                                <input class="input-text" id="subject" type="text" name="subject_text" value="<%= subject%>">
+                            </div>
+                            <textarea id="body-text" name="body_text"><%= body%></textarea>
                         </div>
-                        <div class="email-input">
-                            <p class="hint">Subject </p>
-                            <input class="input-text" id="subject" type="text" name="subject_text" value="<%= subject%>" >
+                        <div class="email-buttons">
+                            <button id="Save" class="input-submit" type="button" onclick="openSaveDefaultEmailModal()"> Save email as default</button>
+                            <input id="send-button" class="input-submit" type="submit" value="Send">
                         </div>
-                        <textarea id="body-text" name="body_text"><%= body%></textarea>
-                    </div>
-                    <div class = "email-buttons">
-                        <button id = "Save" class="input-submit" type="button" onclick="openSaveDefaultEmailModal()" > Save email as default</button>
-                        <input id="send-button" class="input-submit" type="submit" value="Send">
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="recommendations">
-        <table id="table0">
-            <thead>
-            <tr>
-                <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
-                <td><a href="javascript:sortByEmail(0)">Email</a></td>
-                <td><a href="javascript:sortByOrg(0)">Organization</a></td>
-                <td><a href="javascript:sortByTemplate(0)">Template</a></td>
-                <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
-                <td class="icons"></td>
-            </tr>
-            </thead>
-            <tbody id="table-body">
-                <% if (false) { %>
-                <tr>
-                    <td colspan="6" style="text-align: center;">No Existing Recommendations</td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
-        <div id="page0">
-            <div id="buttons0">
-                <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
-                <div id="page-numbers0"></div>
-                <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+        <div class="recommendations">
+            <table id="table0">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
+                        <td><a href="javascript:sortByEmail(0)">Email</a></td>
+                        <td><a href="javascript:sortByOrg(0)">Organization</a></td>
+                        <td><a href="javascript:sortByTemplate(0)">Template</a></td>
+                        <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
+                        <td class="icons"></td>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <% if (false) { %>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">No Existing Recommendations</td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <div id="page0">
+                <div id="buttons0">
+                    <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
+                    <div id="page-numbers0"></div>
+                    <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<script src="/javascripts/recommender-dashboard.js"></script>
-<script>
-    let email = "<%= email %>";
-    search("");
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="/javascripts/recommender-dashboard.js"></script>
+    <script>
+        let email = "<%= email %>";
+        search("");
+    </script>
 </body>
+
 </html>
