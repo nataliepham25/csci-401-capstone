@@ -39,6 +39,7 @@ const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
 const User = require("./models/user");
+const history = require("./routes/history");
 const publicKey = fs.readFileSync(
   path.join(__dirname, "/config/jwtRS256.key.pub")
 );
@@ -82,7 +83,7 @@ app.use(fileUpload());
 
 // view engine setup
 
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views")); //-----------------------------------------------
 app.set("view engine", "ejs");
 
 // uncomment after placing your favicon in /public
@@ -161,6 +162,7 @@ app.use(function (req, res, next) {
   next(err);
 });
 
+app.use("/history", history);
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
@@ -175,6 +177,7 @@ app.use(function (err, req, res, next) {
 
 // Sets "X-Frame-Options: DENY"
 app.use(helmet.frameguard({ action: "deny" }));
+// app.use("/history", history);
 
 //check auth header
 function isAuthenticated(req, res, next) {

@@ -39,7 +39,7 @@ RUN \
 ENV MONGO_PATH=/usr/local/mongodb
 ENV PATH=$PATH:$MONGO_PATH/bin
 ENV EMAILUSER=letterrecommender@gmail.com
-ENV EMAILPASS=USCPassword123!
+ENV EMAILPASS=mjgpzruklyxixqmc
 
 #Downloading project repo
 RUN \
@@ -56,17 +56,16 @@ RUN \
 #  && tail -f /dev/null
 
 
- 
- 
 
 
-  
-
- 
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
+

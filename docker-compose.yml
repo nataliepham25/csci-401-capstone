@@ -17,7 +17,7 @@ services:
     build: .
     environment:
       - EMAILUSER=letterrecommender@gmail.com
-      - EMAILPASS=USCPassword123!
+      - EMAILPASS=mjgpzruklyxixqmc
       - PORT=80
     ports:
       - "443:443"
